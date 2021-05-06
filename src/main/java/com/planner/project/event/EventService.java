@@ -26,4 +26,12 @@ public class EventService {
         eventRepository.save(event);
         System.out.println(event);
     }
+
+    public void deleteEvent(Long eventId) {
+        boolean exists = eventRepository.existsById(eventId);
+        if (!exists){
+            throw new IllegalArgumentException("event with id: " + eventId + " does not exist!");
+        }
+        eventRepository.deleteById(eventId);
+    }
 }
