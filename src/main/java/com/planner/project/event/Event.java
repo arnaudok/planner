@@ -1,10 +1,12 @@
 package com.planner.project.event;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@Entity
+@Entity(name = "Event")
 @Table
 public class Event {
     @Id
@@ -14,19 +16,13 @@ public class Event {
     private String type;
     private  String privacy;
     private String description;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate date;
+
+    @DateTimeFormat(pattern="HH:mm")
     private LocalTime time;
 
     public Event() {
-    }
-
-    public Event(Long id, String type, String privacy, String description, LocalDate date, LocalTime time) {
-        this.id = id;
-        this.type = type;
-        this.privacy = privacy;
-        this.description = description;
-        this.date = date;
-        this.time = time;
     }
 
     public Event(String type, String privacy, String description, LocalDate date, LocalTime time) {

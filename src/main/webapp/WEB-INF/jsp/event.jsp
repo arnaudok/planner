@@ -10,6 +10,7 @@
 </head>
 <body>
 <h1 align="center">My Events</h1>
+<h2><a href="/newEvent">Add Event</a> </h2>
 <br/>
 <table border="1" cellpadding="10" align="center">
     <tr>
