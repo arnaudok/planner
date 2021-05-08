@@ -14,6 +14,8 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
 import javax.ws.rs.Path;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -48,7 +50,7 @@ public class EventController {
 
     @PostMapping(path="/newEvent")
     public RedirectView submit(@Valid @ModelAttribute("event")Event event,
-                               BindingResult result, ModelMap model, @DateTimeFormat(pattern="yyyy-MM-dd")Date date) {
+                               BindingResult result, ModelMap model, @DateTimeFormat(pattern="yyyy-MM-dd")LocalDate date) {
         if (result.hasErrors()) {
             System.out.println(result.getAllErrors());
             return new RedirectView("error");
@@ -73,14 +75,16 @@ public class EventController {
         return "events";
         }
 
-    @PutMapping(path = "/event{eventId}")
+    @PostMapping(path = "/events/{eventId}")
     public String updateEvent(@PathVariable("eventId")Long eventId,
                             @RequestParam(required = false) String description,
                             @RequestParam(required = false) String type,
                             @RequestParam(required = false) String privacy,
-                            @RequestParam(required = false) LocalDate date,
+                            @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd")LocalDate date,
                             @RequestParam(required = false) LocalTime time){
+        System.out.println("Event to update" + eventId);
         eventService.updateEvent(eventId,type,privacy,description,date,time);
+        System.out.println("Event updated!");
         return "redirect:/events";
     }
 
@@ -108,5 +112,13 @@ public class EventController {
         privacyOptions.add("personal");
         modelAndView.addObject("privacyOptions", privacyOptions);
         return modelAndView;
+    }
+
+    private LocalDate convertDate(LocalDate date){
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        String datestr = dateFormat.format(date);
+        LocalDate newDate = LocalDate.parse(datestr);
+        System.out.println(newDate);
+        return newDate;
     }
 }

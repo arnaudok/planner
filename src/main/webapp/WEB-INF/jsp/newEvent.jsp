@@ -21,7 +21,7 @@
             <td><form:select path="privacy" items="${privacyOptions}" /></td>
         </tr>
         <tr>
-            <td><form:label path="date">Date(dd-MM-yyyy)</form:label></td>
+            <td><form:label path="date">Date(yyyy-MM-dd)</form:label></td>
             <td><form:input type="date" path="date" required="required" /></td>
         </tr>
         <tr>
