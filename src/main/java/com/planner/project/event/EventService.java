@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
+import java.time.Year;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -61,5 +62,14 @@ public class EventService {
         if (time != null && !Objects.equals(event.getTime(), time)){
             event.setTime(time);
         }
+    }
+
+    public List<Event> getAllByMonth(LocalDate date){
+        Month month = date.getMonth();
+        int lastDay = date.lengthOfMonth();
+        int year = date.getYear();
+        LocalDate endDate = LocalDate.of(year, month, lastDay);
+        System.out.println(date + " " + endDate);
+        return eventRepository.findAllByDateBetween(date, endDate);
     }
 }

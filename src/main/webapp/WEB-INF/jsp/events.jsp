@@ -11,9 +11,17 @@
     <title>Events Table</title>
 </head>
 <body>
-<h1 align="center">My Events</h1>
-<h2><a href="/newEvent">Add Event</a> </h2>
+<header><h1>View events by:</h1><a href="/events/byMonth">Month</a> </header>
+<h1 align="center">All Events</h1> <c:if test="${month != null}">for ${month}</c:if>
+<h2 align="center"><a href="/newEvent">Add Event</a></h2>
 <br/>
+<form:form method="POST"
+           action="/events" >
+    <input type="month" id="yearMonth" name="yearMonth"
+           min="2021-01" required = "required">
+    <input type="submit" value="Month">
+</form:form>
+
 <table border="1" cellpadding="10" align="center">
     <tr>
         <th>type</th><th>privacy</th><th>description</th><th>date</th><th>time</th><th>edit</th><th>delete</th>
@@ -28,7 +36,7 @@
             <td><form action="/events/${event.id}">
                 <input type="submit" value="edit" />
             </form></td>
-            <td><form:form method="DELETE" action="/delete/${event.id}"><input type="submit" value="delete"></form:form></td>
+            <td><form:form method="DELETE" action="/delete/${event.id}"><input type="submit" value="delete" onclick="return confirm('Are you sure you want to delete this event?')" ></form:form></td>
         </tr>
     </c:forEach>
 </table>
