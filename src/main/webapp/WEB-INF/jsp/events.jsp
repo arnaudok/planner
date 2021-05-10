@@ -11,16 +11,57 @@
     <title>Events Table</title>
 </head>
 <body>
-<header><h1>View events by:</h1><a href="/events/byMonth">Month</a> </header>
-<h1 align="center">All Events</h1> <c:if test="${month != null}">for ${month}</c:if>
-<h2 align="center"><a href="/newEvent">Add Event</a></h2>
-<br/>
-<form:form method="POST"
-           action="/events" >
-    <input type="month" id="yearMonth" name="yearMonth"
-           min="2021-01" required = "required">
+<header> View <a href="/events">All</a> <form:form method="GET"
+                   action="/events" >
+    <label>by</label>
+    <input type="hidden" name="filter" value="month">
+    <input type="month" id="yearMonth" name="month"
+           min="2021-01" max="2021-12" required = "required">
     <input type="submit" value="Month">
 </form:form>
+    <form:form method="GET"
+               action="/events" >
+    <label>by</label>
+    <input type="hidden" name="filter" value="day">
+    <input type="date" name="date"
+               min="2021-01-01" max="2021-12-31" required = "required">
+        <input type="submit" value="Day">
+    </form:form>
+
+    <form:form method="GET"
+               action="/events" >
+    <label>by</label>
+    <input type="hidden" name="filter" value="type">
+    <td> <select name="type">
+        <option value="meeting">Meeting</option>
+        <option value="task">Task</option>
+    </select>
+        <input type="submit" value="Type">
+    </td>
+    </form:form>
+
+    <form:form method="GET"
+               action="/events" >
+        <label>for a period</label>
+        <input type="hidden" name="filter" value="period">
+        <label>between</label>
+        <input type="date" name="dateStart"
+               min="2021-01-01" max="2021-12-31" required = "required">
+        <label>and</label>
+        <input type="date" name="dateEnd"
+               min="2021-01-01" max="2021-12-31" required = "required">
+        <input type="submit" value="period">
+    </form:form>
+</header>
+
+<h1 align="center">All Events</h1> <h2 align="center"><c:if test="${month != null}">for the month of ${month}</c:if>
+    <c:if test="${day != null}">for ${day}</c:if>
+    <c:if test="${type != null}">of type ${type}</c:if>
+
+</h2>
+<h2 align="center"><a href="/newEvent">Add Event</a></h2>
+<br/>
+
 
 <table border="1" cellpadding="10" align="center">
     <tr>

@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
 import java.time.Year;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -32,8 +33,8 @@ public class EventService {
     }
 
     public void addNewEvent(Event event) {
-        eventRepository.save(event);
         System.out.println(event);
+        eventRepository.save(event);
     }
 
     public void deleteEvent(Long eventId) {
@@ -64,12 +65,42 @@ public class EventService {
         }
     }
 
-    public List<Event> getAllByMonth(LocalDate date){
+    public List<Event> getAllByMonth(String yearMonth){
+        String[] arr = yearMonth.split("-");
+        String yearStr = arr[0];
+        String monthStr = arr[1];
+        LocalDate date = LocalDate.of(Integer.parseInt(yearStr), Integer.parseInt(monthStr), 1);
         Month month = date.getMonth();
         int lastDay = date.lengthOfMonth();
         int year = date.getYear();
         LocalDate endDate = LocalDate.of(year, month, lastDay);
         System.out.println(date + " " + endDate);
         return eventRepository.findAllByDateBetween(date, endDate);
+    }
+
+    public List<Event> getAllByDay(String date){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate = LocalDate.parse(date,formatter);
+        return eventRepository.findAllByDate(localDate);
+    }
+
+    public List<Event> getAllByType(String type){
+        return eventRepository.findAllByType(type);
+    }
+
+    public String getDay(String date){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate = LocalDate.parse(date,formatter);
+        String day = String.valueOf(localDate.getDayOfMonth());
+        Month month = localDate.getMonth();
+        return day + " of " + month;
+    }
+    public String getMonth (String yearMonth){
+        String[] arr = yearMonth.split("-");
+        String yearStr = arr[0];
+        String monthStr = arr[1];
+        LocalDate date = LocalDate.of(Integer.parseInt(yearStr), Integer.parseInt(monthStr), 1);
+        Month month =  date.getMonth();
+        return month + "";
     }
 }

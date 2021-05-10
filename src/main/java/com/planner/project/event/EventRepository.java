@@ -12,8 +12,8 @@ import java.util.List;
 public interface EventRepository extends JpaRepository<Event, Long> {
     public List<Event> findAllByOrderByDateAscTimeAsc();
 
-//
-//    @Query("select e from Event p where year(e.date) = ?1 and month(e.date) = ?2")
     public List<Event> findAllByDateBetween(LocalDate date1, LocalDate date2);
+    public List<Event> findAllByDate(LocalDate date);
+    List<Event> findAllByType(String type);
 
 }

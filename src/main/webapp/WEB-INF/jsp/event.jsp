@@ -42,5 +42,6 @@
         </tr>
     </table>
 </form:form>
+<h2><a href="/events">Back to list</a> </h2>
 </body>
 </html>

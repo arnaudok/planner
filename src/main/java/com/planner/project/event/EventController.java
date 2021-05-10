@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,12 +28,10 @@ import java.util.Optional;
 public class EventController {
 
     private final EventService eventService;
-    private final ViewService viewService;
 
     @Autowired
-    public EventController(EventService eventService, ViewService viewService) {
+    public EventController(EventService eventService) {
         this.eventService = eventService;
-        this.viewService = viewService;
     }
 
 
@@ -68,39 +67,34 @@ public class EventController {
 
 
     @GetMapping(path = "/events")
-    public String getEvents(Model model){
-        List<Event> eventsList =  eventService.getEvents();
-        model.addAttribute("events", eventsList);
-        System.out.println(model);
-
-        //view options
-        List<String> viewOptions = new ArrayList<>();
-        viewOptions.add("All");
-        viewOptions.add("by day");
-        viewOptions.add("by week");
-        viewOptions.add("by month");
-        model.addAttribute("viewOptions", viewOptions);
-
+    public String getEvents(@RequestParam(required = false) String filter,
+                            @RequestParam(required = false) String month,
+                            @RequestParam(required = false) String date,
+                            @RequestParam(required = false) String type,
+                            Model model){
+        System.out.println(filter);
+        if (filter != null){
+            switch (filter){
+                case "month":
+                    model.addAttribute("events", eventService.getAllByMonth(month));
+                    model.addAttribute("month", eventService.getMonth(month));
+                    break;
+                case "day":
+                    model.addAttribute("events", eventService.getAllByDay(date));
+                    model.addAttribute("day", eventService.getDay(date));
+                    break;
+                case "type":
+                    model.addAttribute("events", eventService.getAllByType(type));
+                    model.addAttribute("type", type);
+            }
+        }
+        else {
+            List<Event> eventsList = eventService.getEvents();
+            model.addAttribute("events", eventsList);
+            System.out.println(model);
+        }
         return "events";
-        }
-
-        @PostMapping(path = "/events")
-        public String viewEvents(@RequestParam(required = false) String viewOptions,
-                                 @RequestParam(required = false) String yearMonth,
-                                 Model model){
-            System.out.println("View option" + viewOptions);
-            System.out.println(yearMonth);
-            String[] arr = yearMonth.split("-");
-            String year = arr[0];
-            String month = arr[1];
-            LocalDate date = LocalDate.of(Integer.parseInt(year), Integer.parseInt(month), 1);
-            System.out.println(date);
-            List<Event> events = eventService.getAllByMonth(date);
-            System.out.println(events);
-            model.addAttribute("events", events);
-            model.addAttribute("month", month);
-            return "events";
-        }
+    }
 
     @PostMapping(path = "/events/{eventId}")
     public String updateEvent(@PathVariable("eventId")Long eventId,
@@ -140,8 +134,4 @@ public class EventController {
         modelAndView.addObject("privacyOptions", privacyOptions);
         return modelAndView;
     }
-
-    //View options
-
-
 }
