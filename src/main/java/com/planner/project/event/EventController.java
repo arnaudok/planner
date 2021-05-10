@@ -71,6 +71,8 @@ public class EventController {
                             @RequestParam(required = false) String month,
                             @RequestParam(required = false) String date,
                             @RequestParam(required = false) String type,
+                            @RequestParam(required = false) String startDate,
+                            @RequestParam(required = false) String endDate,
                             Model model){
         System.out.println(filter);
         if (filter != null){
@@ -86,6 +88,11 @@ public class EventController {
                 case "type":
                     model.addAttribute("events", eventService.getAllByType(type));
                     model.addAttribute("type", type);
+                    break;
+                case "period":
+                    System.out.printf(startDate + " " +  endDate);
+                    model.addAttribute("events", eventService.getAllByPeriod(startDate, endDate));
+                    model.addAttribute("period", "Between " + startDate + " and " + endDate);
             }
         }
         else {

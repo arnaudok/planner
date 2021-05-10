@@ -10,10 +10,8 @@ import java.util.List;
 
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
-    public List<Event> findAllByOrderByDateAscTimeAsc();
-
-    public List<Event> findAllByDateBetween(LocalDate date1, LocalDate date2);
-    public List<Event> findAllByDate(LocalDate date);
-    List<Event> findAllByType(String type);
-
+     List<Event> findAllByOrderByDateAscTimeAsc();
+     List<Event> findAllByDateBetween(LocalDate date1, LocalDate date2);
+     List<Event> findAllByDate(LocalDate date);
+     List<Event> findAllByType(String type);
 }

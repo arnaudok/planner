@@ -45,10 +45,10 @@
         <label>for a period</label>
         <input type="hidden" name="filter" value="period">
         <label>between</label>
-        <input type="date" name="dateStart"
+        <input type="date" name="startDate"
                min="2021-01-01" max="2021-12-31" required = "required">
         <label>and</label>
-        <input type="date" name="dateEnd"
+        <input type="date" name="endDate"
                min="2021-01-01" max="2021-12-31" required = "required">
         <input type="submit" value="period">
     </form:form>
@@ -57,7 +57,7 @@
 <h1 align="center">All Events</h1> <h2 align="center"><c:if test="${month != null}">for the month of ${month}</c:if>
     <c:if test="${day != null}">for ${day}</c:if>
     <c:if test="${type != null}">of type ${type}</c:if>
-
+    <c:if test="${period != null}">${period}</c:if>
 </h2>
 <h2 align="center"><a href="/newEvent">Add Event</a></h2>
 <br/>

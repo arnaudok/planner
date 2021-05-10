@@ -103,4 +103,11 @@ public class EventService {
         Month month =  date.getMonth();
         return month + "";
     }
+
+    public List<Event> getAllByPeriod(String date1, String date2){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate startDate = LocalDate.parse(date1, formatter);
+        LocalDate endDate = LocalDate.parse(date2, formatter);
+        return eventRepository.findAllByDateBetween(startDate, endDate);
+    }
 }
