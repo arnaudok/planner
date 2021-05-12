@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.lang.reflect.Array;
 import java.text.DateFormat;
@@ -118,8 +119,9 @@ public class EventController {
     }
 
     @PostMapping(path = "/delete/{eventId}")
-    public String deleteEvent(@PathVariable("eventId") Long eventId){
+    public String deleteEvent(@PathVariable("eventId") Long eventId, HttpServletResponse response){
         eventService.deleteEvent(eventId);
+        response.setStatus(200);
         return "redirect:/events";
     }
 

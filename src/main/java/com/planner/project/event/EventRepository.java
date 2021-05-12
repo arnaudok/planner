@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
      List<Event> findAllByOrderByDateAscTimeAsc();
-     List<Event> findAllByDateBetween(LocalDate date1, LocalDate date2);
-     List<Event> findAllByDate(LocalDate date);
-     List<Event> findAllByType(String type);
+     List<Event> findAllByDateBetweenOrderByDateAscTimeAsc(LocalDate date1, LocalDate date2);
+     List<Event> findAllByDateOrderByDateAscTimeAsc(LocalDate date);
+     List<Event> findAllByTypeOrderByDateAscTimeAsc(String type);
 }

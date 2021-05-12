@@ -11,7 +11,7 @@
     <title>Events Table</title>
 </head>
 <body>
-<header> View <a href="/events">All</a> <form:form method="GET"
+<header > View <a href="/events">All</a> <form:form method="GET"
                    action="/events" >
     <label>by</label>
     <input type="hidden" name="filter" value="month">

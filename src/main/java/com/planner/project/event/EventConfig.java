@@ -12,7 +12,7 @@ import static java.time.Month.*;
 
 @Configuration
 public class EventConfig {
-//
+
 //    @Bean
 //    CommandLineRunner commandLineRunner(EventRepository repository){
 //        return args -> {

@@ -75,17 +75,24 @@ public class EventService {
         int year = date.getYear();
         LocalDate endDate = LocalDate.of(year, month, lastDay);
         System.out.println(date + " " + endDate);
-        return eventRepository.findAllByDateBetween(date, endDate);
+        return eventRepository.findAllByDateBetweenOrderByDateAscTimeAsc(date, endDate);
     }
 
     public List<Event> getAllByDay(String date){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate = LocalDate.parse(date,formatter);
-        return eventRepository.findAllByDate(localDate);
+        return eventRepository.findAllByDateOrderByDateAscTimeAsc(localDate);
     }
 
     public List<Event> getAllByType(String type){
-        return eventRepository.findAllByType(type);
+        return eventRepository.findAllByTypeOrderByDateAscTimeAsc(type);
+    }
+
+    public List<Event> getAllByPeriod(String date1, String date2){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate startDate = LocalDate.parse(date1, formatter);
+        LocalDate endDate = LocalDate.parse(date2, formatter);
+        return eventRepository.findAllByDateBetweenOrderByDateAscTimeAsc(startDate, endDate);
     }
 
     public String getDay(String date){
@@ -102,12 +109,5 @@ public class EventService {
         LocalDate date = LocalDate.of(Integer.parseInt(yearStr), Integer.parseInt(monthStr), 1);
         Month month =  date.getMonth();
         return month + "";
-    }
-
-    public List<Event> getAllByPeriod(String date1, String date2){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate startDate = LocalDate.parse(date1, formatter);
-        LocalDate endDate = LocalDate.parse(date2, formatter);
-        return eventRepository.findAllByDateBetween(startDate, endDate);
     }
 }
