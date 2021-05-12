@@ -8,17 +8,29 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link href="${pageContext.request.contextPath}/style.css" type="text/css" rel="stylesheet" />
     <title>Events Table</title>
 </head>
 <body>
-<header > View <a href="/events">All</a> <form:form method="GET"
+    <ol>
+   <li> <label>View</label> <form:form method="GET"
                    action="/events" >
+       <input type="submit" value="All">
+   </form:form>
+
+       <form:form method="GET"
+                   action="/events" > </li>
+
+        <li>
     <label>by</label>
     <input type="hidden" name="filter" value="month">
     <input type="month" id="yearMonth" name="month"
-           min="2021-01" max="2021-12" required = "required">
+           min="2021-01" max="2021-12" required = "required" placeholder="2021-01">
     <input type="submit" value="Month">
 </form:form>
+        </li>
+
+        <li>
     <form:form method="GET"
                action="/events" >
     <label>by</label>
@@ -27,7 +39,10 @@
                min="2021-01-01" max="2021-12-31" required = "required">
         <input type="submit" value="Day">
     </form:form>
+        </li>
 
+
+        <li>
     <form:form method="GET"
                action="/events" >
     <label>by</label>
@@ -39,7 +54,10 @@
         <input type="submit" value="Type">
     </td>
     </form:form>
+        </li>
 
+
+        <li>
     <form:form method="GET"
                action="/events" >
         <label>for a period</label>
@@ -52,7 +70,8 @@
                min="2021-01-01" max="2021-12-31" required = "required">
         <input type="submit" value="period">
     </form:form>
-</header>
+        </li>
+    </ol>
 
 <h1 align="center">All Events</h1> <h2 align="center"><c:if test="${month != null}">for the month of ${month}</c:if>
     <c:if test="${day != null}">for ${day}</c:if>

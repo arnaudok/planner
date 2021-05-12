@@ -1,6 +1,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
+    <link href="${pageContext.request.contextPath}/style.css" type="text/css" rel="stylesheet" />
+<title>New Event</title>
 </head>
 <body>
 <h1>Add new event</h1>
