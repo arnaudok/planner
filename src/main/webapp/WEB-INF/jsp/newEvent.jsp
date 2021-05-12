@@ -12,21 +12,22 @@
             <td><form:input path="description" required="required"/></td>
         </tr>
         <tr>
-            <td><form:label path="type">Type</form:label></td>
-           <td> Meeting: <form:radiobutton path="type" value="meeting"/>
-            Task: <form:radiobutton path="type" value="task"/></td>
+            <td><form:label for="meeting" path="type">Type</form:label></td>
+           <td> <label for="meeting">meeting</label><form:radiobutton path="type" value="meeting" name="meeting" checked="checked" />
+               <form:label path="type" for="task">task</form:label>
+             <form:radiobutton path="type" value="task" name="task" /></td>
         </tr>
         <tr>
             <td><form:label path="privacy">Privacy</form:label></td>
             <td><form:select path="privacy" items="${privacyOptions}" /></td>
         </tr>
         <tr>
-            <td><form:label path="date">Date(yyyy-MM-dd)</form:label></td>
-            <td><form:input type="date" path="date" required="required" /></td>
+            <td><form:label path="date">Date</form:label></td>
+            <td><form:input type="date" path="date" required="required" placeholder="yyyy-MM-dd" /></td>
         </tr>
         <tr>
             <td><form:label path="time">Time</form:label></td>
-            <td><form:input type="time" path="time" required="required" /></td>
+            <td><form:input type="time" path="time" required="required" placeholder="hh:mm"/></td>
         </tr>
         <tr>
             <td><input type="submit" value="Submit"/></td>

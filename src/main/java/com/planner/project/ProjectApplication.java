@@ -1,8 +1,7 @@
-package com.planner.project.event;
+package com.planner.project;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 public class ProjectApplication {

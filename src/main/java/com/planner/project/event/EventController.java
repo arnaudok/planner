@@ -36,20 +36,20 @@ public class EventController {
 
 
     @GetMapping(path = "/newEvent")
-    public ModelAndView showForm(){
+    public String addEvent(Model model){
         List<String> privacyOptions = new ArrayList<>();
         privacyOptions.add("public");
         privacyOptions.add("confidential");
         privacyOptions.add("personal");
-        ModelAndView modelAndView = new ModelAndView("newEvent", "event", new Event());
-        modelAndView.addObject("privacyOptions", privacyOptions);
-        return modelAndView;
+        model.addAttribute("privacyOptions", privacyOptions);
+        model.addAttribute("event", new Event());
+        return "newEvent";
 
     }
 
     @PostMapping(path="/newEvent")
     public RedirectView submit(@ModelAttribute("event")Event event,
-                               BindingResult result, ModelMap model, @DateTimeFormat(pattern="yyyy-MM-dd")LocalDate date) {
+                               BindingResult result, Model model, @DateTimeFormat(pattern="yyyy-MM-dd")LocalDate date) {
         if (result.hasErrors()) {
             System.out.println(result.getAllErrors());
             return new RedirectView("error");
@@ -90,9 +90,10 @@ public class EventController {
                     model.addAttribute("type", type);
                     break;
                 case "period":
-                    System.out.printf(startDate + " " +  endDate);
+                    System.out.println(startDate + " " +  endDate);
                     model.addAttribute("events", eventService.getAllByPeriod(startDate, endDate));
                     model.addAttribute("period", "Between " + startDate + " and " + endDate);
+                    break;
             }
         }
         else {
