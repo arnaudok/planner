@@ -27,7 +27,7 @@ _________________
 ## Can also be tested locally
 #### Requirements: JRE or JDK and a MySql service running on port 3306
 1. Download the eventPlanner.jar and event.sql files or clone the repository to your machine
-2. Create a new DB called event in your MySql service and run the command
+2. Create a new DB called 'event' in your MySql service and run the command
 ```shell
    $ mysql -u username -p event < event.sql
 ```
