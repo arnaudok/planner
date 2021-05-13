@@ -31,7 +31,7 @@ _________________
 ```shell
    $ mysql -u username -p event < event.sql
 ```
-3. navigate to the eventPlanner.jar path and run the command
+3. navigate to the eventPlanner.jar and run the command
 ```shell
    $ java -jar eventPlanner.jar
 ```
