@@ -6,9 +6,9 @@
     - type (meeting or task)
     - privacy (public, confidential, or personal)
     - date ("yyyy-MM-dd")
-    - time (hh:mm)
+    - time ("hh:mm")
     
-2. Ability to edit the events and all of its properties
+2. Ability to edit the events and all of their properties
 3. Ability to delete each event
 4. Ability to show all events for a specified criteria:
     - for a specific date
