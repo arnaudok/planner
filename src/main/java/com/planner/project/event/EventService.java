@@ -46,7 +46,7 @@ public class EventService {
 
     @Transactional
     public void updateEvent(Long eventId, String type, String privacy, String description, LocalDate date, LocalTime time){
-        Event event = eventRepository.findById(eventId).orElseThrow(() -> new IllegalStateException("Event with if " + eventId + "does not exists"));
+        Event event = eventRepository.findById(eventId).orElseThrow(() -> new IllegalStateException("Event with id " + eventId + "does not exists"));
         if (description != null && description.length() > 0 && !Objects.equals(event.getDescription(), description)){
             event.setDescription(description);
         }
