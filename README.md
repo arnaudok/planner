@@ -10,7 +10,7 @@
     
 2. Ability to edit the events and all of their properties
 3. Ability to delete each event
-4. Ability to show all events for a specified criteria:
+4. Ability to show all events according to a specified criteria:
     - for a specific date
     - for a specific month
     - of a specific type
